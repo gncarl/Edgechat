@@ -30,6 +30,10 @@ import { registerInstanceBridgePublicRoutes, registerInstanceBridgeRoutes } from
 import { InstanceBridge } from './do/InstanceBridge.ts';
 import { rescueBridgeDeliveries } from './integrations/instance-bridge/delivery.ts';
 import { registerChannelRoutes } from './api/channels.js';
+import {
+  registerChannelInvitePublicRoutes,
+  registerChannelInviteRoutes
+} from './api/channel-invites.js';
 import { registerContactRoutes } from './api/contacts.ts';
 import { registerLoginNetworkRoutes } from './api/login-network.ts';
 import { registerDmRoutes } from './api/dm.js';
@@ -91,6 +95,7 @@ app.get('/api/site', async (c) => {
 
 registerTelegramPublicRoutes(app);
 registerInstanceBridgePublicRoutes(app);
+registerChannelInvitePublicRoutes(app);
 
 app.get('/api/register-links/:token', async (c) => {
   const token = String(c.req.param('token') || '').trim();
@@ -294,6 +299,7 @@ registerUserBlockRoutes(app);
 registerUserProfileRoutes(app);
 registerUploadRoutes(app);
 registerChannelRoutes(app);
+registerChannelInviteRoutes(app);
 registerAdminRoutes(app);
 registerRbacRoutes(app);
 registerStorageRoutes(app);
