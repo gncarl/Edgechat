@@ -112,10 +112,10 @@ export default {
     });
   },
   session() {
-    return request('/auth/session');
+    return request('/auth/session', { signal: AbortSignal.timeout(10000) });
   },
   getSite() {
-    return request('/site');
+    return request('/site', { signal: AbortSignal.timeout(10000) });
   },
   changePassword(payload) {
     return request('/auth/change-password', {
@@ -404,6 +404,31 @@ export default {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: payload
+    });
+  },
+  channelInviteLink(token) {
+    return request(`/invite-links/${encodeURIComponent(token)}`);
+  },
+  joinChannelByInvite(token) {
+    return request(`/invite-links/${encodeURIComponent(token)}/join`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: {}
+    });
+  },
+  listChannelInviteLinks(channelId) {
+    return request(`/channels/${channelId}/invite-links`);
+  },
+  createChannelInviteLink(channelId, payload) {
+    return request(`/channels/${channelId}/invite-links`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: payload
+    });
+  },
+  revokeChannelInviteLink(channelId, inviteId) {
+    return request(`/channels/${channelId}/invite-links/${inviteId}`, {
+      method: 'DELETE'
     });
   }
 };
