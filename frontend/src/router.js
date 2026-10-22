@@ -21,6 +21,12 @@ const router = createRouter({
       meta: { public: true, transition: 'page' }
     },
     {
+      path: '/invite/:token',
+      name: 'invite-join',
+      component: () => import('./pages/InviteJoinPage.vue'),
+      meta: { public: true, transition: 'page' }
+    },
+    {
       path: '/',
       name: 'chat',
       component: () => import('./pages/ChatPage.vue'),
