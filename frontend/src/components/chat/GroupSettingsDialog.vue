@@ -4,6 +4,7 @@ import { isCapacitorAndroid, pickNativeFile } from '../../capacitor-platform.ts'
 import { useOverlayLifecycle } from '../../composables/useOverlayLifecycle.js';
 import { t } from '../../i18n.js';
 import UiAvatar from '../ui/Avatar.vue';
+import ChannelInvitePanel from './ChannelInvitePanel.vue';
 
 const props = defineProps({
   show: { type: Boolean, default: false },
@@ -60,6 +61,11 @@ async function openAvatarPicker() {
           <input ref="nameInputEl" v-model="form.name" type="text" class="room-dialog__input" :disabled="room?.isGeneral" />
         </label>
 
+        <ChannelInvitePanel
+          v-if="room && room.canManage && room.kind !== 'dm'"
+          :channel-id="room.id"
+        />
+
         <div class="room-dialog__actions">
           <button type="button" class="room-dialog__secondary" @click="emit('close')">{{ t('common.cancel') }}</button>
           <button type="button" class="room-dialog__primary" :disabled="!form.name.trim() || saving" @click="emit('save')">
@@ -96,7 +102,7 @@ async function openAvatarPicker() {
 .room-dialog__actions { display: flex; justify-content: flex-end; gap: 12px; margin-top: 24px; }
 .room-dialog__secondary, .room-dialog__primary { min-height: 44px; padding: 10px 20px; border-radius: 8px; cursor: pointer; touch-action: manipulation; }
 .room-dialog__secondary { border: 1px solid #e8ecf0; background: #fff; }
-.room-dialog__primary { border: 0; background: #008069; color: #fff; }
+.room-dialog__primary { border: 0; background: var(--site-action-bg, #008069); color: var(--site-on-action, #fff); }
 .room-dialog__primary:disabled, .room-dialog__secondary:disabled { cursor: not-allowed; opacity: 0.55; }
 .modal-fade-enter-active { transition: opacity 200ms; }
 .modal-fade-leave-active { transition: opacity 150ms; }
