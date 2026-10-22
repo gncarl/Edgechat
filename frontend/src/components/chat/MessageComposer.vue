@@ -653,7 +653,7 @@ onBeforeUnmount(() => {
 	padding: 2px 8px;
 	border: 0;
 	border-radius: 4px;
-	background: rgba(0, 128, 105, 0.1);
+	background: rgba(var(--site-brand-rgb, 0, 128, 105), 0.1);
 	color: var(--chat-accent);
 	font: inherit;
 	font-weight: 600;
@@ -714,7 +714,7 @@ onBeforeUnmount(() => {
 
 .mention-option:hover,
 .mention-option--active {
-	background: #edf8f2;
+	background: var(--site-selected, #edf8f2);
 }
 
 .mention-option__label {
@@ -891,7 +891,7 @@ onBeforeUnmount(() => {
 }
 
 .composer-btn--active {
-	background: rgba(0, 128, 105, 0.1);
+	background: rgba(var(--site-brand-rgb, 0, 128, 105), 0.1);
 	color: var(--chat-accent);
 }
 
@@ -906,8 +906,8 @@ onBeforeUnmount(() => {
 	gap: 6px;
 	padding: 0 12px;
 	border-radius: 22px;
-	background: var(--chat-accent);
-	color: var(--chat-paper);
+	background: var(--site-action-bg, var(--chat-accent));
+	color: var(--site-on-action, var(--chat-paper));
 	font: inherit;
 	font-size: 14px;
 	font-weight: 600;
@@ -916,7 +916,7 @@ onBeforeUnmount(() => {
 }
 
 .composer-send:hover:not(:disabled) {
-	background: var(--chat-accent-hover);
+	background: var(--site-action-hover, var(--chat-accent-hover));
 }
 
 .composer-btn:active:not(:disabled) {
@@ -924,7 +924,7 @@ onBeforeUnmount(() => {
 }
 
 .composer-send:active:not(:disabled) {
-	background: var(--chat-accent-pressed);
+	background: var(--site-action-pressed, var(--chat-accent-pressed));
 }
 
 .composer-btn:focus-visible,

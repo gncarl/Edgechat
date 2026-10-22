@@ -130,7 +130,7 @@ async function submit(event) {
   align-items: center;
   justify-content: center;
   padding: 24px;
-  background-color: #f5f5f5;
+  background-color: var(--auth-canvas, #f5f5f5);
   position: relative;
   overflow: hidden;
 }
@@ -140,7 +140,7 @@ async function submit(event) {
   position: fixed;
   inset: 0;
   z-index: 0;
-  background: linear-gradient(to bottom, transparent 0%, #e1ecf5 25%, #e6eff6 100%);
+  background: var(--auth-tide, linear-gradient(to bottom, transparent 0%, #e1ecf5 25%, #e6eff6 100%));
   transform: translateY(100%);
   animation: tideRise 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
   pointer-events: none;
@@ -170,7 +170,7 @@ async function submit(event) {
   font-family: 'Dancing Script', cursive;
   font-size: 56px;
   font-weight: 700;
-  color: #2c4a6e;
+  color: var(--auth-ink, #2c4a6e);
   margin: 0 0 10px;
   letter-spacing: 1px;
   opacity: 0;
@@ -181,7 +181,7 @@ async function submit(event) {
   font-family: 'Great Vibes', cursive;
   font-size: 52px;
   font-weight: 400;
-  color: #5b8dbf;
+  color: var(--auth-brand, #5b8dbf);
   margin: -8px 0 48px;
   letter-spacing: 2px;
   opacity: 0;
@@ -211,27 +211,12 @@ async function submit(event) {
 .input-wrapper {
   position: relative;
   width: 100%;
-  opacity: 0;
-  animation: slideInRight 0.6s cubic-bezier(0.22, 1, 0.36, 1) forwards;
-}
-
-.input-wrapper:first-of-type {
-  animation-delay: 1.2s;
-}
-
-.input-wrapper:last-of-type {
-  animation-delay: 1.4s;
-}
-
-@keyframes slideInRight {
-  0% { opacity: 0; transform: translateX(32px); }
-  100% { opacity: 1; transform: translateX(0); }
 }
 
 .custom-cursor {
   position: absolute;
   width: 3px;
-  background-color: #2c4a6e;
+  background-color: var(--auth-ink, #2c4a6e);
   border-radius: 2px;
   opacity: 0;
   pointer-events: none;
@@ -255,15 +240,15 @@ async function submit(event) {
   background: transparent;
   font-size: 18px;
   font-weight: 500;
-  color: #2c4a6e;
+  color: var(--auth-ink, #2c4a6e);
   outline: none;
   caret-color: transparent;
 }
 
 .login-input::placeholder {
-  color: #2c4a6e;
+  color: var(--auth-ink, #2c4a6e);
   text-decoration: underline;
-  text-decoration-color: #5b8dbf;
+  text-decoration-color: var(--auth-brand, #5b8dbf);
   text-decoration-thickness: 3px;
   text-underline-offset: 8px;
 }
@@ -272,9 +257,9 @@ async function submit(event) {
   width: fit-content;
   height: auto;
   border: none;
-  border-bottom: 3px solid #5b8dbf;
+  border-bottom: 3px solid var(--auth-brand, #5b8dbf);
   background: transparent;
-  color: #2c4a6e;
+  color: var(--auth-ink, #2c4a6e);
   font-size: 24px;
   font-weight: 700;
   cursor: pointer;
@@ -282,24 +267,16 @@ async function submit(event) {
   margin: 8px auto 0;
   letter-spacing: 2px;
   padding: 0 4px 8px;
-  opacity: 0;
-  animation: riseUp 0.6s cubic-bezier(0.22, 1, 0.36, 1) 1.6s forwards;
-}
-
-@keyframes riseUp {
-  0% { opacity: 0; transform: translateY(24px); }
-  100% { opacity: 1; transform: translateY(0); }
 }
 
 .login-btn:hover:not(:disabled) {
-  border-bottom-color: #2c4a6e;
+  border-bottom-color: var(--auth-ink, #2c4a6e);
   transform: scale(1.04);
 }
 
 .login-btn:disabled {
   opacity: 0.5;
   cursor: not-allowed;
-  animation: none;
 }
 
 .error-text {
@@ -314,6 +291,29 @@ async function submit(event) {
   top: max(16px, env(safe-area-inset-top));
   right: max(16px, env(safe-area-inset-right));
   z-index: 2;
-  color: #2c4a6e;
+  color: var(--auth-ink, #2c4a6e);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .login-page::before,
+  .welcome-text,
+  .brand-name {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
+
+  .login-btn {
+    transition: none;
+  }
+
+  .login-btn:hover:not(:disabled) {
+    transform: none;
+  }
+
+  .custom-cursor.visible {
+    animation: none;
+    opacity: 1;
+  }
 }
 </style>
